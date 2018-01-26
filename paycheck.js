@@ -43,7 +43,7 @@ console.log(hourlyWage);
 
 taxPercent = determineTaxPercentage(hourlyWage);
 overtimePay = calculateOvertimePay(hours, hourlyWage, normalWeekHours, overtimeRate);
-totalPay = calculateTotalPay(hours, hourlyWage, overtimePay).toFixed(2);
+totalPay = calculateTotalPay(hours, hourlyWage, normalWeekHours, overtimePay).toFixed(2);
 paycheck = calculatePaycheck(totalPay, taxPercent).toFixed(2);
 
 console.log(`You made $${totalPay} before tax, and after taxes your paycheck is $${paycheck}. (deng govment)`);
@@ -124,7 +124,10 @@ function calculateOvertimePay(hours, hourlyWage, normalWeekHours, overtimeRate) 
 	}
 }
 
-function calculateTotalPay(hours, hourlyWage, overtimePay) {
+function calculateTotalPay(hours, hourlyWage, normalWeekHours, overtimePay) {
+	if(hours > normalWeekHours){
+		hours = normalWeekHours;
+	}
 	let totalPay = hours * hourlyWage + overtimePay;
 	return totalPay;
 }
